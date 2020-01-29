@@ -110,7 +110,7 @@ body {
 .madalViewMessage {
     position: absolute;
     background-color: #fff;
-    padding: 30px 50px;
+    padding: 30px 100px;
     top: 45%;
-    left: 35%;
+    left: 30%;
 }
