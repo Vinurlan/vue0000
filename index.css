@@ -1,0 +1,116 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    margin: 0;
+    padding: 10px;
+    background-color: rgb(178, 218, 174);
+    height: 100px;
+    line-height: 100px;
+}
+
+.headerH3 {
+    font-size: 30px;
+    text-align: center;
+    margin: 0;
+    vertical-align: auto;
+}
+
+.madalBg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(95, 95, 95, 0.267);
+}
+
+.madalView {
+    background-color: #fff;
+    width: 480px;
+    height: 350px;
+    padding: 0;
+    position: relative;
+    top: 20%;
+    left: 20%;
+}
+
+.madalCloseBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 5px;
+    padding: 10px;
+    background-color: black;
+    border-radius: 50%;
+    border: 0;
+    color: white;
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+    line-height: 10px;
+}
+
+.madalContainer {
+    height: 350px;
+    display: grid;
+    grid-template-rows: 5fr 2fr;
+
+}
+
+.madalContainer div .madalFormContainer {
+    position: absolute;
+    margin: 25px 50px;
+    width: 380px;
+    height: 240px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+}
+
+.madalFormContainer label {
+    padding: 20px 0 0 0;
+    font-size: 10pt;
+}
+
+.madalContainerButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.madalContainerButtons button {
+    margin: 30px 50px;
+    font-size: 15pt;
+}
+
+.madalClearBtn {
+    background-color: white;
+    border: 0;
+    border-bottom: 1px solid #000;
+}
+
+.madalClearBtn::before {
+    color: red;
+    content: "x";
+    
+}
+
+.madalSubmitBtn {
+    background-color: black;
+    color: white;
+    border: 0;
+}
+
+.invalidInput {
+    outline: 1px solid red;
+}
+
+.madalViewMessage {
+    position: absolute;
+    background-color: #fff;
+    padding: 30px 50px;
+    top: 45%;
+    left: 35%;
+}

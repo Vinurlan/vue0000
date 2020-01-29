@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Vue Traning</title>
+</head>
+<body>
+    <div id="container">
+
+        <div id="madal-view">
+            <div class="madalBg" v-if="madalCallback" v-on:click.self="closeMadal" >            
+                <div class="madalView">
+                    <button v-on:click="closeMadal" class="madalCloseBtn"><b>x</b></button>
+                    <div class="madalContainer">
+                        <div>
+                            <form id="madalFormCallback" class="madalFormContainer">
+                                    <label for="madalName">Ваше имя*</label>
+                                <input id="madalName" v-model="dataCallback.name" @keyUp="validHandler">
+                                    <label for="madalPhone">Ваш номер телефона*</label>
+                                <input type="number" id="madalPhone" v-model="dataCallback.number" @keyUp="validHandler">
+                                    <label for="madalComment">Комментарий к заявке</label>
+                                <input id="madalComment" autocomplete="off" v-model="dataCallback.comment">     
+                            </form>
+                        </div>
+                        <div class="madalContainerButtons">
+                            <button form="madalFormCallback" type="reset" v-on:click="clearContent" class="madalClearBtn">ОЧИСТИТЬ</button>
+                            <button type="submit" v-on:click.prevent="submitMadalHandle" class="madalSubmitBtn">ОТПРАВИТЬ</button>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="madalBg" v-if="madalMessage" v-on:click.self="closeMadalMessage" > 
+                <div class="madalViewMessage">
+                    <span>Успешно отправлено</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="header" class="header">
+            <h3 class="headerH3">Vue Traning</h3>
+        </div>
+        <div id="content">
+            <div id="callback-app">
+                <button type="submit" v-on:click.prevent="openMadalCallback">Обратная связь</button>
+            </div>
+        </div>
+        <div id="footer">
+
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
