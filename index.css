@@ -55,34 +55,44 @@ body {
 
 .madalContainer {
     height: 350px;
-    display: grid;
-    grid-template-rows: 5fr 2fr;
+}
+
+.madalFormContainer {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    height: 270px;
 
 }
 
-.madalContainer div .madalFormContainer {
-    position: absolute;
-    margin: 25px 50px;
-    padding-top: 0;
-    width: 380px;
-    height: 240px;
+.formCallback {
+    position: absolute;   
+    padding-top: 0px;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+}
+
+.inputsFormCallback {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-
 }
 
-.madalFormContainer>label {
-    padding: 0;
+.inputsFormCallback>label {
+    padding: 0 50px;
     display: grid;
     grid-template-rows: 1fr 1fr;
 }
 
-.madalFormContainer>label label {
-    padding: 20px 0 0 0;
-    font-size: 10pt;
+.inputsFormCallback>label label {
+    padding: 0;
+    padding-top: 20px;
+    font-size: 12px;
 }
 
 .madalContainerButtons {
+    margin: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -120,4 +130,24 @@ body {
     padding: 30px 100px;
     top: 45%;
     left: 30%;
+}
+
+.madalListRequest {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    padding: 2px;
+    background-color: rgb(197, 197, 197);
+    outline: 1px solid rgb(197, 197, 197);
+    width: 400px;
+    height: 270px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.madalListPropRequest {
+    margin-bottom: 2px;
+    background-color: #fff;
+    width: 100%;
+    height: 33%;
 }

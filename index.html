@@ -14,30 +14,15 @@
             <div class="madalBg" v-if="madalCallback" v-on:click.self="closeMadal" >            
                 <div class="madalView">
                     <button v-on:click="closeMadal" class="madalCloseBtn"><b>x</b></button>
-                    <div class="madalContainer">
-                        <div>
-                            <!--<form id="madalFormCallback" class="madalFormContainer">
-                                    <label for="madalName">Ваше имя*</label>
-                                <input id="madalName" v-model="dataCallback.name" @keyUp="validHandler">
-                                    <label for="madalPhone">Ваш номер телефона*</label>
-                                <input type="number" id="madalPhone" v-model="dataCallback.number" @keyUp="validHandler">
-                                    <label for="madalComment">Комментарий к заявке</label>
-                                <input id="madalComment" autocomplete="off" v-model="dataCallback.comment">     
-                            </form>-->
-                            <form id="madalFormCallback" class="madalFormContainer">
-                                <madal-input                                                            
-                                    v-for="(prop, index) of madalFormInputs"
-                                    v-bind:key="index"
-                                    v-bind:propsinput="prop"
-                                    v-on:handle-valid="prop.valid"
-                                    v-on:input="prop.value = $event"
-                                ></madal-input>
-                            </form>
-                        </div>
-                        <div class="madalContainerButtons">
-                            <button form="madalFormCallback" type="reset" v-on:click="clearContent" class="madalClearBtn">ОЧИСТИТЬ</button>
-                            <button type="submit" v-on:click.prevent="submitMadalHandle" class="madalSubmitBtn">ОТПРАВИТЬ</button>      
-                        </div>
+                    <div>
+                        <div 
+                            v-bind:is="madalViewCurrent" 
+                            v-bind:propsform="madalFormInputs" 
+                            v-bind:propsfunc="validHandler" 
+                            v-on:handlerclear="clearContent"
+                            v-on:handlersubmit="submitMadalHandle"
+                            v-bind:reqlist="dataListRequests"
+                            ></div>
                     </div>
                 </div>
             </div>
@@ -54,7 +39,8 @@
         </div>
         <div id="content">
             <div id="callback-app">
-                <button type="submit" v-on:click.prevent="openMadalCallback">Обратная связь</button>
+                <button type="submit" v-on:click.prevent="openMadalCallback('form-request')">Обратная связь</button>
+                <button type="submit" v-on:click.prevent="openMadalCallback('list-request', onloadListRequests)">Список запросов</button>
             </div>
         </div>
         <div id="footer">

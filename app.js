@@ -1,17 +1,29 @@
-Vue.component('madal-form', {
-    props: ["propsform"],
+Vue.component('form-request', {
+    props: ["propsform", "propsfunc"],
     template: `
-        <form id="madalFormCallback" class="madalFormContainer">
-            <madal-input
-                v-for="(prop, index) of propsform"
-                v-bind:key="index"
-                v-bind:propsinput="prop"
-            ></madal-input>
+    <div class="madalContainer">
+        <form id="madalFormCallback" class="madalFormContainer" >
+            <label class="formCallback">
+                <label class="inputsFormCallback">
+                    <form-request-input                                                         
+                        v-for="(prop, index) of propsform"
+                        v-bind:key="index"
+                        v-bind:propsinput="prop"
+                        v-on:handle-valid="propsfunc"
+                        v-on:input="prop.value = $event"
+                    ></form-request-input>
+                </label>
+                <label for="" class="madalContainerButtons">
+                    <button form="madalFormCallback" type="reset" v-on:click="$emit('handlerclear')" class="madalClearBtn">ОЧИСТИТЬ</button>
+                    <button type="submit" v-on:click.prevent="$emit('handlersubmit')" class="madalSubmitBtn">ОТПРАВИТЬ</button>      
+                </label>
+            </label> 
         </form>
+    </div>
     `
 })
 
-Vue.component('madal-input', {
+Vue.component('form-request-input', {
     props: ["propsinput"],
     template: `
         <label>
@@ -25,6 +37,31 @@ Vue.component('madal-input', {
                 v-on:keyUp="$emit('handle-valid')"
                 >
         </label>
+    `
+})
+
+Vue.component('list-request', {
+    props: ["reqlist"],
+    template: `
+        <div class="madalListRequest">
+            <list-prop-request
+                v-for="(prop, index) in reqlist"
+                v-bind:key="index"
+                v-bind:proplist="prop"
+            >
+            </list-prop-request>
+        </div>
+    `
+})
+
+Vue.component('list-prop-request', {
+    props: ["proplist"],
+    template: `
+        <div class="madalListPropRequest">
+            {{ proplist.name }} 
+            {{ proplist.number }} 
+            {{ proplist.comment }}
+        </div>
     `
 })
 
@@ -45,6 +82,12 @@ var madalView = new Vue({
             { label: "Ваш номер телефона*", id: "madalPhone", type: "number", value: "", valid: "validHandler"},
             { label: "Комментарий к заявке", id: "madalComment", type: "text", value: "", valid: ""},
         ],
+        madalContent: [
+            { html: "form-request", inputs: "madalFormInputs" },
+            { html: "list-request", inputs: "" }
+        ],
+        madalViewCurrent: "",
+        dataListRequests: {},
     },
     methods: {
         closeMadal: function() {
@@ -56,6 +99,7 @@ var madalView = new Vue({
             this.madalMessage = false;
         },
         validHandler: function(event) {
+            console.log("!")
             if (event.target.value == "") {
                 event.target.classList.add("invalidInput")
             } else {event.target.classList.remove("invalidInput")}
@@ -75,20 +119,28 @@ var madalView = new Vue({
             if (!this.isValid) {
                 return;
             }
-            /*axios.post("https://basebackpack.firebaseio.com/client-request.json", this.dataCallback)
-                .then(response => response.json);*/
+            axios.post("https://basebackpack.firebaseio.com/client-request.json", this.dataCallback)
+                .then(response => response.json);
             this.closeMadal();
             this.isValid = false;
             this.madalMessage = true;
-        }
+        },
+
     }
 })
 
 var callbackApp = new Vue({
     el: "#callback-app",
     methods: {
-        openMadalCallback() {
+        openMadalCallback(madalSetContent, func) {
             madalView.madalCallback = true;
+            madalView.madalViewCurrent = madalSetContent;
+            func ? func() : null;
+        },
+        onloadListRequests: function() {
+            axios.get("https://basebackpack.firebaseio.com/client-request.json")
+                .then(response => madalView.dataListRequests = response.data)
+            
         }
     }
 })
