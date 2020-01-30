@@ -12,7 +12,7 @@ Vue.component('madal-form', {
 })
 
 Vue.component('madal-input', {
-    props: ["propsinput", "propvalue"],
+    props: ["propsinput"],
     template: `
         <label>
         
@@ -20,7 +20,8 @@ Vue.component('madal-input', {
             <input 
                 v-bind:type=propsinput.type
                 v-bind:id=propsinput.id
-                v-bind:v-model=propvalue
+                v-bind:value=propsinput.value
+                v-on:input="$emit('input', $event.target.value)"
                 v-on:keyUp="$emit('handle-valid')"
                 >
         </label>

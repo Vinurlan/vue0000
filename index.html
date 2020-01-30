@@ -25,12 +25,12 @@
                                 <input id="madalComment" autocomplete="off" v-model="dataCallback.comment">     
                             </form>-->
                             <form id="madalFormCallback" class="madalFormContainer">
-                                <madal-input                                
+                                <madal-input                                                            
                                     v-for="(prop, index) of madalFormInputs"
                                     v-bind:key="index"
                                     v-bind:propsinput="prop"
-                                    v-bind:propvalue="prop.value"
                                     v-on:handle-valid="prop.valid"
+                                    v-on:input="prop.value = $event"
                                 ></madal-input>
                             </form>
                         </div>
