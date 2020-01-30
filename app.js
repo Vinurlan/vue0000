@@ -41,9 +41,9 @@ var madalView = new Vue({
         isValid: false,
         madalMessage: false,
         madalFormInputs: [
-            { label: "Ваше имя*", id: "madalName", type: "text", value: "dataCallback.name", valid: "validHandler"},
-            { label: "Ваш номер телефона*", id: "madalPhone", type: "number", value: "dataCallback.number", valid: "validHandler"},
-            { label: "Комментарий к заявке", id: "madalComment", type: "text", value: "dataCallback.comment", valid: ""},
+            { label: "Ваше имя*", id: "madalName", type: "text", value: "", valid: "validHandler"},
+            { label: "Ваш номер телефона*", id: "madalPhone", type: "number", value: "", valid: "validHandler"},
+            { label: "Комментарий к заявке", id: "madalComment", type: "text", value: "", valid: ""},
         ],
     },
     methods: {
@@ -62,19 +62,15 @@ var madalView = new Vue({
         },
         clearContent: function() {
             this.dataCallback = {name: "", number: "", comment: ""}
+            this.madalFormInputs.forEach((item) => item.value="")
         },
         submitMadalHandle: function() {
-            let arr = Object.values(this.dataCallback);
-            for (let i = 0; i < arr.length; i++) {
-                if ( arr[i] != "" ) {
-                    this.isValid = true
-                } else {
-                    this.isValid = false;
-                    if (i != 2) {
-                        document.querySelector("#madalFormCallback").querySelectorAll("input")[i].classList.add("invalidInput");
-                    }
-                }
-            }
+            
+            let arr = this.madalFormInputs.map((item, index) => {
+                item.value != "" ? this.isValid = true : index != 2 ? document.querySelector("#madalFormCallback").querySelectorAll("input")[index].classList.add("invalidInput") : null;
+                return item.value
+            });
+            this.dataCallback = { name: arr[0], number: arr[1], comment: arr[2] };
             
             if (!this.isValid) {
                 return;
